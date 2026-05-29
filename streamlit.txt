@@ -1,0 +1,7 @@
+conda create -n streamlit-2026 python=3.12
+
+conda activate streamlit-2026
+
+pip install streamlit
+
+streamlit run main.py

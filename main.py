@@ -25,15 +25,15 @@ def cal_general_stats(df):
         df_data["Média 24M Diferença Mensal Abs."] = df_data["Diferença Mensal Abs."].rolling(24).mean()
 
         df_data["Diferença Mensal Rel."] = df_data["Valor"] / df_data["lag_1"] - 1
+       
+        df_data["Evolução 6M Total"] = df_data["Valor"].rolling(6).apply(lambda x: x.iloc[-1] - x.iloc[0])
+        df_data["Evolução 12 Total"] = df_data["Valor"].rolling(12).apply(lambda x: x.iloc[-1] - x.iloc[0])
+        df_data["Evolução 24M Total"] = df_data["Valor"].rolling(24).apply(lambda x: x.iloc[-1] - x.iloc[0])
 
-        df_data["Evolução 6M Total"] = df_data["Valor"].rolling(6).apply(lambda x: x[-1] - x[0])
-        df_data["Evolução 12 Total"] = df_data["Valor"].rolling(12).apply(lambda x: x[-1] - x[0])
-        df_data["Evolução 24M Total"] = df_data["Valor"].rolling(24).apply(lambda x: x[-1] - x[0])
-
-        df_data["Evolução 6M Rel."] = df_data["Valor"].rolling(6).apply(lambda x: x[-1] / x[0] - 1)
-        df_data["Evolução 12 Rel."] = df_data["Valor"].rolling(12).apply(lambda x: x[-1] / x[0] - 1)
-        df_data["Evolução 24M Rel."] = df_data["Valor"].rolling(24).apply(lambda x: x[-1] / x[0] - 1)
-        
+        df_data["Evolução 6M Rel."] = df_data["Valor"].rolling(6).apply(lambda x: x.iloc[-1] / x.iloc[0] - 1)
+        df_data["Evolução 12 Rel."] = df_data["Valor"].rolling(12).apply(lambda x: x.iloc[-1] / x.iloc[0] - 1)
+        df_data["Evolução 24M Rel."] = df_data["Valor"].rolling(24).apply(lambda x: x.iloc[-1] / x.iloc[0] - 1)
+            
         df_data = df_data.drop("lag_1", axis=1)
 
         return df_data
